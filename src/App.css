@@ -1,0 +1,46 @@
+:root {
+  font-size: 62.5%;
+  --type-first: Helvetica, Arial, sans-serif;
+  --type-second: 'Spectral', Georgia;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  color: #333;
+  font-family: var(--type-first);
+  font-size: 1.6rem;
+  padding-top: 6.4rem;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button {
+  display: block;
+  font-size: 1.6rem;
+  font-family: var(--type-first);
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-inline: 2rem;
+}
+

@@ -1,0 +1,29 @@
+.input {
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 0.8rem 2rem;
+  margin-bottom: 2rem;
+  border: 2px solid #eee;
+  background: #eee;
+  box-sizing: border-box;
+  
+  border-radius: 0.5rem;
+}
+
+.input:focus {
+  background: #fff;
+  border: 2px solid #764701;
+
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.error {
+  font-size: 1.2rem;
+  color: #cc0606;
+  position: relative;
+  top: -10px;
+}
