@@ -1,5 +1,6 @@
 import React from 'react';
 import useForm from '../../hooks/useForm';
+import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Form/Button'
 import Input from '../../components/Form/Input';
@@ -8,31 +9,15 @@ const LoginForm = () => {
   const username = useForm();
   const password = useForm();
 
-  const fetchLogin = () => {
-    fetch(`https://dogsapi.origamid.dev/json/jwt-auth/v1/token`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value,
-      })
-    }).then((response) => {
-      console.log(response)
-      return response.json()
-    }).then((json) => {
-      console.log(json)
-      return json.token
-    })
-  }
-  
+  const { login, loading, error } = React.useContext(UserContext)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (username.validate() && password.validate()) {
-      fetchLogin()
+        login(username.value, password.value)
+      }
     }
-  }
+  
 
   return (
     <section>
@@ -55,7 +40,12 @@ const LoginForm = () => {
           onBlur={password.onBlur}
           error={password.error} />
         
-        <Button text='Entrar' />
+        {loading ? 
+          <Button disabled text='Carregando...' />
+          :
+          <Button text='Entrar' />
+        }
+        { error && <p>{error}</p>}
       </form>
 
       <Link to='/login/cadastrar'>Cadastrar</Link>

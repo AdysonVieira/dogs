@@ -1,11 +1,16 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
 import LoginCreate from './LoginCreate'
 import LoginForm from './LoginForm'
 import LoginPwdLost from './LoginPwdLost'
 import LoginPwdReset from './LoginPwdReset'
 
 const Login = () => {
+  const {logged} = React.useContext(UserContext)
+
+  if (logged) return <Navigate to='/conta' />
+  
   return (
     <section>
       <Routes>
