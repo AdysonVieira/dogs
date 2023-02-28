@@ -15,7 +15,8 @@ const Input = (props) => {
         className={styles.input}
         type={props.type}
         value={props.value}
-        onChange={(event) => props.setValue(event.target.value)}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
       />
       <p className={styles.error}>{props.error}</p>
     </>
