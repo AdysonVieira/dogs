@@ -22,7 +22,6 @@ export const UserContextProvider = ({ children }) => {
           const response = await fetch(url, options);
           if (!response.ok) {
             throw new Error('Token inválido');
-            setLogged(false)
           };
           setLogged(true)
           await getUser(token);

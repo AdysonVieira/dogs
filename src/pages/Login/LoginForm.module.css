@@ -1,0 +1,16 @@
+.lostPwd {
+  display: inline-block;
+  text-decoration: none;
+  color: '#666';
+  font-size: 1.4rem;
+  margin-bottom: 6rem;
+}
+
+.subtitle {
+  margin-bottom: 1rem;
+}
+
+.cadastro > p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}

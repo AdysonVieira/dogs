@@ -1,15 +1,18 @@
 import React from 'react';
-import useForm from '../../hooks/useForm';
 import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
 import Button from '../../components/Form/Button'
 import Input from '../../components/Form/Input';
+import Erro from '../../components/Helper/Erro';
+import styles from './LoginForm.module.css'
+import stylesBtn from '../../components/Form/Button.module.css'
 
 const LoginForm = () => {
   const username = useForm();
   const password = useForm();
 
-  const { login, loading, error } = React.useContext(UserContext)
+  const { login, loading, error } = React.useContext(UserContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,10 +23,12 @@ const LoginForm = () => {
   
 
   return (
-    <section>
-      <h1>Entrar</h1>
+    <section className='fadeInLeft'>
+      <h1 className='title'>Entrar</h1>
+      <Erro error={error} />
       <form onSubmit={handleSubmit}>
-        <Input label='Usuário'
+        <Input 
+          label='Usuário'
           type='text'
           id='username'
           value={username.value}
@@ -45,10 +50,14 @@ const LoginForm = () => {
           :
           <Button text='Entrar' />
         }
-        { error && <p>{error}</p>}
       </form>
 
-      <Link to='/login/cadastrar'>Cadastrar</Link>
+      <Link to='/login/perdeu' className={styles.lostPwd}>Esqueceu a Senha?</Link>
+      <div className={styles.cadastro}>
+        <h2 className={styles.subtitle}>Cadastre-se</h2>
+        <p>Ainda não possui conta? Clique e cadastre-se.</p>
+        <Link to='/login/cadastrar' className={stylesBtn.button}>Cadastrar</Link>
+      </div>
     </section>
   );
 };
