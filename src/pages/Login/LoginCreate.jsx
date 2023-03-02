@@ -3,7 +3,8 @@ import { UserContext } from '../../UserContext'
 import { USER_POST } from '../../api';
 import Input from '../../components/Form/Input';
 import useForm from '../../hooks/useForm';
-import Erro from '../../components/Helper/Erro';
+import useFetch from '../../hooks/useFetch';
+import Error from '../../components/Helper/Error';
 import Button from '../../components/Form/Button';
 
 
@@ -12,9 +13,7 @@ const LoginCreate = () => {
   const email = useForm('email');
   const password = useForm();
   const { login } = React.useContext(UserContext)
-
-  const [error, setError] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
+  const { loading, error, request} = useFetch();
 
   const setUser = async (username, email, password) => {
     const { url, options } = USER_POST({
@@ -22,23 +21,15 @@ const LoginCreate = () => {
       email,
       password,
     })
-    try {
-      setLoading(true)
-      const response = await fetch(url, options);
-      if (response.ok) {
-        login(username, password)
-      } else if (!response.ok) {
-        throw new Error('Usuário já Cadastrado')
-      }
-    } catch(err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
+    const { response, json } = await request(url, options)
+    console.log(response)
+    if (response.ok) {
+      login(username, password)
     }
   }
   
   
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     if (username.validate()
     && email.validate()
@@ -50,7 +41,7 @@ const LoginCreate = () => {
   return (
     <section className='fadeInLeft'>
       <h1 className='title'>Cadastrar</h1>
-      <Erro error={error} />
+      <Error error={error} />
       <form onSubmit={handleSubmit}>
         <Input
           label='Usuário'

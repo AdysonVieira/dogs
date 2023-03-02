@@ -23,17 +23,18 @@ export const UserContextProvider = ({ children }) => {
           if (!response.ok) {
             throw new Error('Token inválido');
           };
-          setLogged(true)
           await getUser(token);
-          navigate('/conta');
+          setLogged(true);
         } catch(err) {
-            setError(true);
-            setLogged(false)
-            logout();
+          setError(true);
+          logout();
         } finally {
-            setLoading(false);
+          setLoading(false);
         };
-      };
+      } else {
+        setLogged(false);
+      }
+
     };
     autoLogin();
   }, []);
@@ -61,7 +62,6 @@ export const UserContextProvider = ({ children }) => {
       navigate('/conta')
     } catch(err) {
       setError(err.message)
-      setLogged(false)
     } finally {
       setLoading(false)
     }
@@ -78,7 +78,7 @@ export const UserContextProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ user, login, logout, loading, error }}>
+    <UserContext.Provider value={{ user, login, logout, loading, error, logged }}>
       {children}
     </UserContext.Provider>
   )

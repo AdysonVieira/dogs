@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import Button from '../../components/Form/Button'
 import Input from '../../components/Form/Input';
-import Erro from '../../components/Helper/Erro';
+import Error from '../../components/Helper/Error';
 import styles from './LoginForm.module.css'
 import stylesBtn from '../../components/Form/Button.module.css'
 
@@ -25,7 +25,7 @@ const LoginForm = () => {
   return (
     <section className='fadeInLeft'>
       <h1 className='title'>Entrar</h1>
-      <Erro error={error} />
+      <Error error={error} />
       <form onSubmit={handleSubmit}>
         <Input 
           label='Usuário'
