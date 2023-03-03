@@ -1,0 +1,29 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.h1 {
+  margin: 2rem 0;
+}
+
+.button {
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  position: relative
+}
+
+.button:after {
+  content: '';
+  background-image: url('../../assets/img/sair.svg');
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 2.8rem;
+  height: 2.8rem;
+  top: 4px;
+}

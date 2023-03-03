@@ -1,0 +1,23 @@
+.nav {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: start;
+}
+
+.nav :where(a, button) {
+  text-align: center;
+  font-weight: 600;
+
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: 2px solid #fb1;
+  
+  background-color: #fb1;
+  color: #764701;
+}
+
+.nav :where(a:hover, button:hover) {
+  border: 2px solid #764701;
+  box-sizing: border-box;
+}

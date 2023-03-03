@@ -22,7 +22,6 @@ const Header = () => {
             className={styles.login}
           >
             {user.username}
-            { user && <button onClick={logout} >Sair</button>}
           </Link>
           : 
           <Link 
