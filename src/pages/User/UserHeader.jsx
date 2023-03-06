@@ -23,7 +23,8 @@ const UserHeader = () => {
         setTitle('Minha Conta')
         break
     }
-  }, [location])
+  }, [location]);
+
   return (
     <header className={styles.nav}>
       <div className={styles.top}>

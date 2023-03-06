@@ -16,8 +16,8 @@ export const UserContextProvider = ({ children }) => {
       const token = window.localStorage.getItem('token');
       if (token) {
         try {
-          setError(null)
-          setLoading(true)
+          setError(null);
+          setLoading(true);
           const { url, options } = TOKEN_VALIDATE_POST(token);
           const response = await fetch(url, options);
           if (!response.ok) {
