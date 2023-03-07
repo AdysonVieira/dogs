@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { UserContext } from '../UserContext';
 const Header = () => {
-  const { user, logout } = useContext(UserContext)
+  const { user, logout } = useContext(UserContext);
   
   return (
     <header className={styles.header}>

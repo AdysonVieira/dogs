@@ -1,11 +1,18 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
 import Feed from '../Feed/Feed'
 import UserHeader from './UserHeader'
 import UserPhotoPost from './UserPhotoPost'
 import UserStats from './UserStats'
 
 const User = () => {
+  React.useEffect(() => {
+    fetch('https://dogsapi.origamid.dev/json/api/photo')
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+  }, [])
+
   return (
     <div className='container'>
       <UserHeader />

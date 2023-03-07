@@ -1,11 +1,16 @@
 import React from 'react';
 import useMedia from '../../hooks/useMedia';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styles from './UserHeaderNav.module.css';
 
 const UserHeaderNav = () => {
   const mobile = useMedia('(max-width: 40rem)');
-  const [mobileMenuOpened, setMobileMenuOpened] = React.useState();
+  const [mobileMenuOpened, setMobileMenuOpened] = React.useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    setMobileMenuOpened(false);
+  }, [location]);
 
   return (
     <>
@@ -16,7 +21,7 @@ const UserHeaderNav = () => {
           onClick={() => setMobileMenuOpened(!mobileMenuOpened)}>
         </button>
       )}
-      <nav className={styles.nav}>
+      <nav className={`${mobile ? styles.navMobile : styles.nav} ${mobileMenuOpened && styles.navMobileActive}`}>
         <NavLink to='/conta' end>Feed</NavLink>
         <NavLink to='/conta/estatisticas'>Estatísticas</NavLink>
         <NavLink to='/conta/postar'>Adicionar Foto</NavLink>
