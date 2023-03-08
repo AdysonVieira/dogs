@@ -7,7 +7,7 @@ import FeedPhotosItem from './FeedPhotosItem';
 import styles from './FeedPhotos.module.css'
 
 const FeedPhotos = () => {
-  const { data, loading, error, request} = useFetch();
+  
   
   React.useEffect(() => {
     const fetchPhotos = async () => {
