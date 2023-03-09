@@ -1,0 +1,28 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 65rem 38rem;
+  grid-template-rows: auto 1fr auto;
+  background-color: #fff;
+  margin: auto;
+}
+
+.img {
+  grid-row: 1/4;
+}
+
+.wrapper :where(.details, .comments, form) {
+  padding: 2rem;
+}
+
+.details h1 {
+  margin-bottom: 0.8rem;
+}
+
+.details span {
+  font-weight: 600;
+}
+
+.inputComment {
+  display: flex;
+  gap: 1rem;
+}

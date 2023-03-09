@@ -6,13 +6,14 @@ import FeedPhotosItem from './FeedPhotosItem';
 import Loading from '../../components/Helper/Loading';
 import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
+
 const Feed = () => {
   const { data, loading, error, request} = useFetch();
   const [modalOpened, setModalOpened] = React.useState(false);
   const [idPhoto, setIdPhoto] = React.useState(null);
 
   const fetchPhotosToFeed = async () => {
-    const {url, options} = PHOTOS_GET({page: 1, total: 20, user: 0});
+    const {url, options} = PHOTOS_GET({page: 1, total: 6, user: 0});
     await request(url, options);
   };
 
@@ -25,8 +26,13 @@ const Feed = () => {
   if (data) {
     return (
       <>
-        {modalOpened && <FeedModal idPhoto={idPhoto} />}
-        <ul className={styles.feed}>
+        {modalOpened &&
+          <FeedModal 
+            idPhoto={idPhoto}
+            setModalOpened={setModalOpened}
+          />}
+          
+        <ul className={`${styles.feed} container`}>
           {data.map((post) => (
             <FeedPhotosItem
               key={post.id}
