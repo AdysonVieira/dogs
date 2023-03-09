@@ -8,6 +8,7 @@ import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
 const Feed = () => {
   const { data, loading, error, request} = useFetch();
+  const [modalOpened, setModalOpened] = React.useState(false);
 
   const fetchPhotosToFeed = async () => {
     const {url, options} = PHOTOS_GET({page: 1, total: 6, user: 0})
@@ -22,11 +23,18 @@ const Feed = () => {
   if (error) return <Error error={error} />
   if (data) {
     return (
-      <ul className={styles.feed}>
-        {data.map((post) => (
-          <FeedPhotosItem key={post.id} {...post} />
-        ))}
-      </ul>
+      <>
+        {modalOpened && <FeedModal />}
+        <ul className={styles.feed}>
+          {data.map((post) => (
+            <FeedPhotosItem
+              key={post.id}
+              {...post}
+              toggle={setModalOpened}
+              value={modalOpened}/>
+            ))}
+        </ul>
+      </>
     )
   }
 }
