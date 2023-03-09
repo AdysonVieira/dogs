@@ -27,6 +27,7 @@
 .view::before {
   content: '';
   background-image: url('../../assets/img/visualizacao.svg');
+  background-repeat: no-repeat;
   width: 1.6rem;
   height: 1rem;
   margin-right: 0.8rem;

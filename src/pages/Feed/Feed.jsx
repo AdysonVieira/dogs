@@ -9,34 +9,36 @@ import styles from './Feed.module.css';
 const Feed = () => {
   const { data, loading, error, request} = useFetch();
   const [modalOpened, setModalOpened] = React.useState(false);
+  const [idPhoto, setIdPhoto] = React.useState(null);
 
   const fetchPhotosToFeed = async () => {
-    const {url, options} = PHOTOS_GET({page: 1, total: 6, user: 0})
-    await request(url, options)
-  }
+    const {url, options} = PHOTOS_GET({page: 1, total: 20, user: 0});
+    await request(url, options);
+  };
 
   React.useEffect(() => {
     fetchPhotosToFeed();
-  }, [request])
+  }, [request]);
   
   if (loading) return <Loading />
   if (error) return <Error error={error} />
   if (data) {
     return (
       <>
-        {modalOpened && <FeedModal />}
+        {modalOpened && <FeedModal idPhoto={idPhoto} />}
         <ul className={styles.feed}>
           {data.map((post) => (
             <FeedPhotosItem
               key={post.id}
               {...post}
-              toggle={setModalOpened}
-              value={modalOpened}/>
+              setModalOpened={setModalOpened}
+              setIdPhoto={setIdPhoto}
+            />
             ))}
         </ul>
       </>
-    )
-  }
-}
+    );
+  };
+};
 
-export default Feed
+export default Feed;
