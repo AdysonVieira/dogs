@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { PHOTOS_GET } from '../../api';
 import useFetch from '../../hooks/useFetch';
 import FeedModal from './FeedModal';
@@ -27,10 +28,15 @@ const Feed = () => {
     return (
       <>
         {modalOpened &&
-          <FeedModal 
-            idPhoto={idPhoto}
-            setModalOpened={setModalOpened}
-          />}
+          createPortal(
+            <FeedModal 
+              idPhoto={idPhoto}
+              modalOpened={modalOpened}
+              setModalOpened={setModalOpened}
+            />, 
+            document.getElementById('root')
+          )
+        }
           
         <ul className={`${styles.feed} container`}>
           {data.map((post) => (

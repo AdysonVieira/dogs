@@ -1,31 +1,44 @@
 import React from 'react';
 import { PHOTO_GET } from '../../api';
 import useFetch from '../../hooks/useFetch';
-import useForm from '../../hooks/useForm';
 import Error from '../../components/Helper/Error';
-
 import styles from './FeedModal.module.css';
 import PhotoContent from '../../components/Photo/PhotoContent';
 import Loading from '../../components/Helper/Loading';
 
-const FeedModal = ({idPhoto, setModalOpened}) => {
+const FeedModal = ({idPhoto, setModalOpened, modalOpened}) => {
   const { data, error, loading, request} = useFetch();
-  const comment = useForm();
 
   const fetchPhoto = async () => {
     const { url, options } = PHOTO_GET(idPhoto);
     await request(url, options);
   }
   
+  const handleClick = (event) => {
+    if (event.target === event.currentTarget) return setModalOpened(false)
+  }
+
+  React.useEffect(() => {
+    const closeModalOnKey = (event) => {
+      if (event.key === 'Escape') return setModalOpened(false)
+    }
+    window.addEventListener('keydown', closeModalOnKey);
+    return () => {
+      window.removeEventListener('keydown', closeModalOnKey);
+    }
+  }, [modalOpened])
+  
   React.useEffect(() => {
     fetchPhoto();
   }, [idPhoto])
 
   return (
-    <div className={styles.modal}>
+    <div 
+      className={styles.modal}
+      onClick={handleClick}>
       {loading && <Loading />}
       {error && <Error error={error} />}
-      {data && <PhotoContent data={data} comment={comment} />}
+      {data && <PhotoContent data={data} fetchPhoto={fetchPhoto}/>}
     </div>
   )
 }

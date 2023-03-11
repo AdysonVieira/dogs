@@ -1,16 +1,11 @@
 import React from 'react';
-import { UserContext } from '../../UserContext'
-import useForm from '../../hooks/useForm';
-import Comment from './Comment';
-import Input from '../../components/Form/Input';
-import Button from '../../components/Form/Button';
-import styles from './PhotoContent.module.css';
+
 import { Link } from 'react-router-dom';
+import PhotoComment from './PhotoComment';
+import styles from './PhotoContent.module.css';
 
 const PhotoContent = (props) => {
-  const { logged } = React.useContext(UserContext);
-  const { photo, comments } = props.data
-
+  const { photo, comments } = props.data;
   
   return (
     <div className={styles.wrapper}>
@@ -31,25 +26,7 @@ const PhotoContent = (props) => {
           <span>Idade: {photo.idade} </span>
         </div>
       </div>
-        
-      <ul className={styles.comments}>
-        {comments.map((comment) => (
-          <Comment key={comment.comment_ID} comment={comment}/>
-        ))}
-      </ul>
-      {logged && (
-        <form className={styles.inputComment}>
-          <Input
-            name='comment'
-            id='comment'
-            value={props.comment.value}
-            onChange={props.comment.onChange}
-            onBlur={props.comment.onBlur}
-            placeholder='Digite seu comentário'
-            />
-          <Button text='' />
-        </form>
-      )}
+      <PhotoComment comments={comments} photo={photo} /> 
     </div>
   )
 }
