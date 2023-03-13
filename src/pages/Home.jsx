@@ -3,7 +3,7 @@ import Feed from './Feed/Feed'
 
 const Home = () => {
   return (
-    <section className={`container fadeInLeft`}>
+    <section className={`fadeInLeft`}>
       <Feed />
     </section>
   )

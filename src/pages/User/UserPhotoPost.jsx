@@ -85,6 +85,7 @@ const UserPhotoPost = () => {
           ? <Button text='Enviando...' disabled />
           : <Button text='Enviar' />
         }
+        {photo && <img src={photo.raw} />}
       </form>
       <div>
         {photo.preview &&
