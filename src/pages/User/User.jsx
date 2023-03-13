@@ -10,7 +10,6 @@ const User = () => {
   React.useEffect(() => {
     fetch('https://dogsapi.origamid.dev/json/api/photo')
       .then((response) => response.json())
-      .then((data) => console.log(data))
   }, [])
 
   return (

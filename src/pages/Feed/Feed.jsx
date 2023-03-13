@@ -46,7 +46,7 @@ const Feed = () => {
               setModalOpened={setModalOpened}
               setIdPhoto={setIdPhoto}
             />
-            ))}
+          ))}
         </ul>
       </>
     );

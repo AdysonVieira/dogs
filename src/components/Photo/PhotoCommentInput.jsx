@@ -1,7 +1,8 @@
 import React from 'react';
-import useFetch from '../../hooks/useFetch'
-import { COMMENT_POST } from '../../api'
+import useFetch from '../../hooks/useFetch';
+import { COMMENT_POST } from '../../api';
 import Button from '../Form/Button';
+import styles from './PhotoCommentInput.module.css';
 
 const PhotoCommentInput = (props) => {
   const [comment, setComment] = React.useState('');
