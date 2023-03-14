@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 
-.photo img,
+.photo > div,
 .photo .view {
   grid-area: 1/-1;
   color: white;
