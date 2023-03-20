@@ -8,13 +8,13 @@ import Loading from '../../components/Helper/Loading';
 import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
 
-const Feed = () => {
+const Feed = ({user}) => {
   const { data, loading, error, request} = useFetch();
   const [modalOpened, setModalOpened] = React.useState(false);
   const [idPhoto, setIdPhoto] = React.useState(null);
 
   const fetchPhotosToFeed = async () => {
-    const {url, options} = PHOTOS_GET({page: 1, total: 6, user: 0});
+    const {url, options} = PHOTOS_GET({page: 1, total: 6, user});
     await request(url, options);
   };
 

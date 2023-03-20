@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <section className={`fadeInLeft`}>
       {loading && <Loading />}
-      <Feed />
+      <Feed user={0}/>
     </section>
   )
 }
