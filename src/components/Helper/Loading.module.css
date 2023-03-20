@@ -1,0 +1,12 @@
+.wrapper {
+  position: fixed;
+  width: 100vw;
+  height: calc(100vh - 6.4rem);
+  display: flex;
+  z-index: 10000;
+  background-color: #ffffffd3;
+}
+
+.loading {
+  margin: auto;
+}
