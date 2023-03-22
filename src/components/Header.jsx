@@ -23,7 +23,7 @@ const Header = () => {
 
         {user.username ? 
           <Link 
-            to='/login'
+            to='/conta'
             className={styles.login}
           >
             {user.username}

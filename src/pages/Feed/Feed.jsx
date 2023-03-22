@@ -9,20 +9,50 @@ import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
 
 const Feed = ({user}) => {
-  const { data, loading, error, request} = useFetch();
+  const { data, loading, error, request } = useFetch();
   const [modalOpened, setModalOpened] = React.useState(false);
   const [idPhoto, setIdPhoto] = React.useState(null);
+  const [total, setTotal] = React.useState(6)
+  const [stopFetch, setStopFetch] = React.useState(true)
 
   const fetchPhotosToFeed = async () => {
-    const {url, options} = PHOTOS_GET({page: 1, total: 6, user});
-    await request(url, options);
+    const {url, options} = PHOTOS_GET({page: 1, total, user});
+    const {json} = await request(url, options);
+    if (total > json.length) {
+      setStopFetch(false)
+    }
   };
 
   React.useEffect(() => {
-    fetchPhotosToFeed();
-  }, [request]);
+    if (stopFetch){
+      fetchPhotosToFeed();
+      console.log('fetch')
+    }
+  }, [total]);
+
+  React.useEffect(() => {
+    let wait = false
+    function scrollFetch() {
+      const scroll = window.scrollY;
+      const height = document.body.offsetHeight - window.innerHeight;
+      if (scroll > height * 0.9 && !wait) {
+        setTotal((prev) => prev + 6)
+        wait = true
+        setTimeout(() => {
+          wait = false
+        }, 500)
+      }
+    }
+
+    window.addEventListener('scroll', scrollFetch)
+    window.addEventListener('wheel', scrollFetch)
+    
+    return () => {
+      window.removeEventListener('scroll', scrollFetch)
+      window.removeEventListener('wheel', scrollFetch)
+    }
+  }, [])
   
-  if (loading) return <Loading />
   if (error) return <Error error={error} />
   if (data) {
     return (
