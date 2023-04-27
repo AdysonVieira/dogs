@@ -7,6 +7,7 @@ import FeedPhotosItem from './FeedPhotosItem';
 import Loading from '../../components/Helper/Loading';
 import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
+import Empty from '../../components/Helper/Empty';
 
 const Feed = ({user}) => {
   const { data, loading, error, request } = useFetch();
@@ -26,7 +27,6 @@ const Feed = ({user}) => {
   React.useEffect(() => {
     if (stopFetch){
       fetchPhotosToFeed();
-      console.log('fetch')
     }
   }, [total]);
 
@@ -54,6 +54,7 @@ const Feed = ({user}) => {
   }, [])
   
   if (error) return <Error error={error} />
+  if (data?.length === 0) return <Empty />
   if (data) {
     return (
       <>
@@ -69,7 +70,7 @@ const Feed = ({user}) => {
         }
           
         <ul className={`${styles.feed} container`}>
-          {data.map((post) => (
+          {data?.map((post) => (
             <FeedPhotosItem
               key={post.id}
               {...post}

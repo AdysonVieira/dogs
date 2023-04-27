@@ -50,6 +50,19 @@ export const USER_POST = (body) => {
   };
 };
 
+export const PASSWORD_LOST = (body) => {
+  return {
+    url: API_URL + '/api/password/lost',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-type' : 'application/json'
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 export const PHOTO_POST = (formData, token) => {
   return {
     url: API_URL + '/api/photo',
