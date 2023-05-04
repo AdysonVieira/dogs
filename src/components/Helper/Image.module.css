@@ -8,6 +8,7 @@
   max-width: 100%;
   opacity: 0;
   transition: 0.2s;
+  background-size: cover;
 }
 
 .skeleton {
@@ -26,5 +27,4 @@
   } to {
     background-position: -200%;
   }
-
 }

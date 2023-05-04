@@ -50,6 +50,32 @@ export const USER_POST = (body) => {
   };
 };
 
+export const PASSWORD_RESET = (body) => {
+  return {
+    url: API_URL + '/api/password/lost',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-type' : 'application/json'
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const PASSWORD_LOST = (body) => {
+  return {
+    url: API_URL + '/api/password/lost',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-type' : 'application/json'
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 export const PHOTO_POST = (formData, token) => {
   return {
     url: API_URL + '/api/photo',
@@ -105,6 +131,18 @@ export const COMMENT_POST = (id, body) => {
         Authorization: 'Bearer ' + window.localStorage.getItem('token'),
       },
       body: JSON.stringify(body)
-    }
-  }
-}
+    },
+  };
+};
+
+export const STATS_GET = () => {
+  return {
+    url: `${API_URL}/api/stats`,
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      },
+    },
+  };
+};

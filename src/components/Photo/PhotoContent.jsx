@@ -6,8 +6,8 @@ import PhotoDelete from './PhotoDelete';
 import Image from '../Helper/Image';
 import styles from './PhotoContent.module.css';
 
-const PhotoContent = (props) => {
-  const { photo, comments } = props.data;
+const PhotoContent = ( { data }) => {
+  const { photo, comments } = data;
   const { user } = React.useContext(UserContext)
 
   return (

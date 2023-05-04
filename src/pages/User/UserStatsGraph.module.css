@@ -1,0 +1,23 @@
+.wrapper {
+  padding-block: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.card {
+  background-color: #f8f8f8;
+  color: #474747 ;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.total {
+  grid-column: 1/-1;
+}
+
+@media (max-width: 780px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}

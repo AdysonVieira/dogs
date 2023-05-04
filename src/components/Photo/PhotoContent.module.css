@@ -1,5 +1,6 @@
 .wrapper {
   display: grid;
+  justify-content: center;
   grid-template-columns: 65rem 30rem;
   grid-template-rows: auto 28rem auto;
   background-color: #fff;
