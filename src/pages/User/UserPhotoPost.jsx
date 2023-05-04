@@ -34,6 +34,7 @@ const UserPhotoPost = () => {
   };
 
   const handleChange = (event) => {
+    console.log(event)
     setPhoto({
       preview: URL.createObjectURL(event.target.files[0]),
       raw: event.target.files[0],
@@ -85,7 +86,6 @@ const UserPhotoPost = () => {
           ? <Button text='Enviando...' disabled />
           : <Button text='Enviar' />
         }
-        {photo && <img src={photo.raw} />}
       </form>
       <div>
         {photo.preview &&

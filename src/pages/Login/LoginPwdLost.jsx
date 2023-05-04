@@ -5,6 +5,7 @@ import Button from '../../components/Form/Button';
 import Input from '../../components/Form/Input';
 import { PASSWORD_LOST } from '../../api';
 import Error from '../../components/Helper/Error';
+import Head from '../../components/Head';
 
 const LoginPwdLost = () => {
   const email = useForm()
@@ -17,16 +18,20 @@ const LoginPwdLost = () => {
         login: email.value,
         url: window.location.href.replace('perdeu', 'resetar')
       })
-      const {json} = request(url, options)
+      const { json } = request(url, options)
     }
   }
 
   
   return (
     <section className='fadeInLeft'>
-      <h1 className='title'>Perdeu a senha?</h1>
+      <Head title='Recuperar senha'/>
+      <h1 className='title' style={{marginBottom: '2.8rem'}} >Perdeu a senha?</h1>
       { data ? 
-        <p style={{color: 'green'}}>{data}</p>
+        <>
+          <p style={{color: 'green'}}>{data}</p>
+          <p style={{marginTop: '1.6rem'}}>Enviamos o link de recuperação para o seu email <strong>{email.value}</strong></p>
+        </>
         : <form onSubmit={handleSubmit} >
             <Error error={error} />
             <Input 

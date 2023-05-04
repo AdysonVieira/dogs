@@ -1,0 +1,13 @@
+.container {
+  background-color: #fb1;
+  color: #764701;
+  height: 10rem;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}

@@ -8,6 +8,7 @@ import Error from '../../components/Helper/Error';
 import Loading from '../../components/Helper/Loading';
 import styles from './LoginForm.module.css'
 import stylesBtn from '../../components/Form/Button.module.css'
+import Head from '../../components/Head';
 
 const LoginForm = () => {
   const username = useForm();
@@ -25,7 +26,8 @@ const LoginForm = () => {
 
   return (
     <section className='fadeInLeft'>
-      <h1 className='title'>Entrar</h1>
+      <Head title='Login'/>
+      <h1 className='title' style={{marginBottom: '2.8rem'}}>Entrar</h1>
       <Error error={error} />
       <form onSubmit={handleSubmit}>
         <Input 

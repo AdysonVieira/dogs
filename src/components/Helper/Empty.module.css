@@ -13,14 +13,11 @@
 
   box-sizing: border-box;
   padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  border: 2px solid #fb1;
   
-  background-color: #fb1;
-  color: #764701;
+  color: #2c59bb;
 }
 
 .btn:hover {
-  border: 2px solid #764701;
+  color: #1e469c;
   box-sizing: border-box;
 }

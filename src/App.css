@@ -42,6 +42,7 @@ a {
 .container {
   max-width: 80rem;
   margin: 0 auto;
+  padding-inline: 2rem;
 }
 
 .fadeInLeft {
@@ -61,4 +62,14 @@ a {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 10rem);
+}
+
+.AppBody {
+  flex: 1;
 }
