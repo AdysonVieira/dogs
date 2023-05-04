@@ -6,12 +6,13 @@ import PhotoDelete from './PhotoDelete';
 import Image from '../Helper/Image';
 import styles from './PhotoContent.module.css';
 
-const PhotoContent = ( { data }) => {
+const PhotoContent = ( { data, setModalOpened }) => {
   const { photo, comments } = data;
   const { user } = React.useContext(UserContext)
 
   return (
     <div className={styles.wrapper}>
+      <button className={styles.close} onClick={() => setModalOpened(false)}>X</button>
       <div className={styles.img}>
         <Image 
           src={photo.src}

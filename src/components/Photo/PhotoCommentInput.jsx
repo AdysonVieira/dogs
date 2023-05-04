@@ -20,7 +20,7 @@ const PhotoCommentInput = (props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <textarea
         id='comment'
         name='comment'
@@ -29,7 +29,7 @@ const PhotoCommentInput = (props) => {
         onChange={(e) => setComment(e.target.value)}
         placeholder="Digite seu comentário..."
       />
-      <Button text="Publicar"/>
+      <Button className={styles.button}text="Publicar"/>
     </form>
   )
 }

@@ -33,12 +33,12 @@ const FeedModal = ({idPhoto, setModalOpened, modalOpened}) => {
   }, [idPhoto])
 
   return (
-    <div 
-      className={styles.modal}
-      onClick={handleClick}>
+    <div
+    className={styles.modal}
+    onClick={handleClick}>
       {loading && <Loading />}
       {error && <Error error={error} />}
-      {data && <PhotoContent data={data} fetchPhoto={fetchPhoto}/>}
+      {data && <PhotoContent data={data} setModalOpened={setModalOpened} />}
     </div>
   )
 }
