@@ -23,21 +23,20 @@ const UserPhotoPost = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
+    formData.append('img', photo.raw);
     formData.append('nome', name.value);
-    formData.append('idade', age.value);
     formData.append('peso', weight.value);
-    formData.append('foto', photo.raw);
+    formData.append('idade', age.value);
 
     const token = window.localStorage.getItem('token');
     const { url, options } = PHOTO_POST(formData, token)
     request(url, options)
   };
 
-  const handleChange = (event) => {
-    console.log(event)
+  const handleChange = ({ target }) => {
     setPhoto({
-      preview: URL.createObjectURL(event.target.files[0]),
-      raw: event.target.files[0],
+      preview: URL.createObjectURL(target.files[0]),
+      raw: target.files[0]
     });
   };
 
