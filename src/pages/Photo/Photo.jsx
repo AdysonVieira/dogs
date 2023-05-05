@@ -5,18 +5,16 @@ import useFetch from '../../hooks/useFetch'
 import { PHOTO_GET } from '../../api'
 import Loading from '../../components/Helper/Loading'
 import Head from '../../components/Head'
+import { fetchPhoto } from '../../store/reducers/photoReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Photo = () => {
   const { id } = useParams()
-  const { data, error, loading, request} = useFetch();
+  const { data, loading, error } = useSelector((state) => state.photo)
+  const dispatch = useDispatch()
   
-  const fetchPhoto = async () => {
-    const { url, options } = PHOTO_GET(id);
-    await request(url, options);
-  }
-
   React.useEffect(() => {
-    fetchPhoto()
+    dispatch(fetchPhoto(id))
   }, [])
   
   if (loading) return <Loading />

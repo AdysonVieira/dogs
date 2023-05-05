@@ -5,11 +5,13 @@ import PhotoComment from './PhotoComment';
 import PhotoDelete from './PhotoDelete';
 import Image from '../Helper/Image';
 import styles from './PhotoContent.module.css';
+import { useSelector } from 'react-redux';
 
-const PhotoContent = ( { data, setModalOpened }) => {
-  const { photo, comments } = data;
+const PhotoContent = ( { setModalOpened }) => {
+  
+  const { photo, comments } = useSelector((state) => state.photo.data)
   const { user } = React.useContext(UserContext)
-
+  
   return (
     <div className={styles.wrapper}>
       <button className={styles.close} onClick={() => setModalOpened(false)}>X</button>

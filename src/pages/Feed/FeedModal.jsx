@@ -5,15 +5,11 @@ import Error from '../../components/Helper/Error';
 import PhotoContent from '../../components/Photo/PhotoContent';
 import Loading from '../../components/Helper/Loading';
 import styles from './FeedModal.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 
-const FeedModal = ({idPhoto, setModalOpened, modalOpened}) => {
-  const { data, error, loading, request} = useFetch();
-
-  const fetchPhoto = async () => {
-    const { url, options } = PHOTO_GET(idPhoto);
-    await request(url, options);
-  }
-  
+const FeedModal = ({ setModalOpened, modalOpened }) => {
+  const { loading, data, error } = useSelector((state) => state.photo)
+   
   const handleClick = (event) => {
     if (event.target === event.currentTarget) return setModalOpened(false)
   }
@@ -28,17 +24,13 @@ const FeedModal = ({idPhoto, setModalOpened, modalOpened}) => {
     }
   }, [modalOpened])
   
-  React.useEffect(() => {
-    fetchPhoto();
-  }, [idPhoto])
-
   return (
     <div
     className={styles.modal}
     onClick={handleClick}>
       {loading && <Loading />}
       {error && <Error error={error} />}
-      {data && <PhotoContent data={data} setModalOpened={setModalOpened} />}
+      {data && <PhotoContent setModalOpened={setModalOpened} />}
     </div>
   )
 }

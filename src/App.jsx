@@ -1,18 +1,18 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/Helper/ProtectedRoute';
 import { UserContextProvider } from './UserContext';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login/Login';
 import User from './pages/User/User';
-import './App.css';
 import Photo from './pages/Photo/Photo';
 import Profile from './pages/Profile/Profile';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import NotFound from './components/Helper/NotFound';
+import './App.css';
 
 function App() {
-  
+
   return (
     <div className='App'>
       <BrowserRouter>

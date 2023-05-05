@@ -4,7 +4,6 @@ import { PHOTOS_GET } from '../../api';
 import useFetch from '../../hooks/useFetch';
 import FeedModal from './FeedModal';
 import FeedPhotosItem from './FeedPhotosItem';
-import Loading from '../../components/Helper/Loading';
 import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
 import Empty from '../../components/Helper/Empty';
@@ -12,7 +11,6 @@ import Empty from '../../components/Helper/Empty';
 const Feed = ({user}) => {
   const { data, loading, error, request } = useFetch();
   const [modalOpened, setModalOpened] = React.useState(false);
-  const [idPhoto, setIdPhoto] = React.useState(null);
   const [total, setTotal] = React.useState(6)
   const [stopFetch, setStopFetch] = React.useState(true)
 
@@ -61,7 +59,6 @@ const Feed = ({user}) => {
         {modalOpened &&
           createPortal(
             <FeedModal 
-              idPhoto={idPhoto}
               modalOpened={modalOpened}
               setModalOpened={setModalOpened}
             />, 
@@ -75,7 +72,6 @@ const Feed = ({user}) => {
               key={post.id}
               {...post}
               setModalOpened={setModalOpened}
-              setIdPhoto={setIdPhoto}
             />
           ))}
         </ul>
