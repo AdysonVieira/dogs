@@ -35,7 +35,7 @@ const Feed = ({user}) => {
     function scrollFetch() {
       const scroll = window.scrollY;
       const height = document.body.offsetHeight - window.innerHeight;
-      if (scroll > height * 0.9 && !wait) {
+      if (scroll > height * 0.6 && !wait) {
         setTotal((prev) => prev + 6)
         wait = true
         setTimeout(() => {

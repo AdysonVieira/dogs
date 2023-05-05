@@ -28,7 +28,7 @@ const PhotoContent = ( { data, setModalOpened }) => {
               {photo.title}
             </Link>
           </h1>
-          <span>Peso: {photo.peso} </span>
+          <span>Peso: {photo.peso}kg</span>
           <span>Idade: {photo.idade} </span>
         </div>
       </div>

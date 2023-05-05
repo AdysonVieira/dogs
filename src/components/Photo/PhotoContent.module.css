@@ -21,6 +21,7 @@
 
 .img {
   grid-row: 1/4;
+  height: 100%;
 }
 
 .wrapper :where(.details, form) {
