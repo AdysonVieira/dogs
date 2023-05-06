@@ -7,20 +7,16 @@ import UserHeader from './UserHeader'
 import UserPhotoPost from './UserPhotoPost'
 import UserStats from './UserStats'
 import NotFound from '../../components/Helper/NotFound'
+import { useSelector } from 'react-redux'
 
 const User = () => {
-  const { user, logged } = React.useContext(UserContext)
-
-  React.useEffect(() => {
-    fetch('https://dogsapi.origamid.dev/json/api/photo')
-      .then((response) => response.json())
-  }, [])
+  const { user } = useSelector((state) => state)
 
   return (
     <div className='container'>
       <UserHeader />
       <Routes>
-        <Route path='/' element={<Feed user={user.id} />} />
+        <Route path='/' element={<Feed user={user.data.id} />} />
         <Route path='postar' element={<UserPhotoPost />} />
         <Route path='estatisticas' element={<UserStats />} />
         <Route path='*' element={<NotFound />} />

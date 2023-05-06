@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
-import { UserContext } from '../UserContext';
+import { useSelector } from 'react-redux';
 const Header = () => {
-  const { user, logout } = useContext(UserContext);
+  const { data } = useSelector((state) => state.user)
   
   return (
     <header className={styles.header}>
@@ -21,12 +21,12 @@ const Header = () => {
           </svg>
         </Link>
 
-        {user.username ? 
+        {data?.username ? 
           <Link 
             to='/conta'
             className={styles.login}
           >
-            {user.username}
+            {data?.username}
           </Link>
           : 
           <Link 

@@ -1,15 +1,16 @@
 import React from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
-import { UserContext } from '../../UserContext';
+import { useLocation } from 'react-router-dom'
 import UserHeaderNav from './UserHeaderNav'
 import styles from './UserHeader.module.css'
+import { logout } from '../../store/reducers/user';
+import { useDispatch } from 'react-redux';
 
 
 const UserHeader = () => {
   const [title, setTitle] = React.useState('')
-  const { logout } = React.useContext(UserContext);
 
   const location = useLocation();
+  const dispatch = useDispatch()
   
   React.useEffect(() => {
     switch(location.pathname) {
@@ -29,7 +30,7 @@ const UserHeader = () => {
     <header className={styles.nav}>
       <div className={styles.top}>
         <h1 className={`${styles.h1} title`}>{title}</h1>
-        <button onClick={logout} className={styles.button}>Sair</button>
+        <button onClick={() => dispatch(logout())} className={styles.button}>Sair</button>
       </div>
       <UserHeaderNav />
     </header>

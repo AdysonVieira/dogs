@@ -40,10 +40,11 @@ const createAsyncSlice = (config) => {
 
   const asyncAction = (payload) => async (dispatch, getState) => {
     try {
-      dispatch(fetchStarted);
+      dispatch(fetchStarted());
       const { url, options } = config.fetchConfig(payload);
       const response = await fetch(url, options);
       const data = await response.json()
+      if (response.ok === false) throw new Error(data.message)
       return dispatch(fetchSuccess(data))
 
     } catch (error) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserContext } from '../../UserContext';
+// import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import Button from '../../components/Form/Button'
@@ -9,17 +9,21 @@ import Loading from '../../components/Helper/Loading';
 import styles from './LoginForm.module.css'
 import stylesBtn from '../../components/Form/Button.module.css'
 import Head from '../../components/Head';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../store/reducers/user';
 
 const LoginForm = () => {
   const username = useForm();
   const password = useForm();
+  const dispatch = useDispatch();
 
-  const { login, loading, error } = React.useContext(UserContext);
+  const state = useSelector((state) => state);
+  const loading = state.token.loading || state.user.loading
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (username.validate() && password.validate()) {
-        login(username.value, password.value)
+        dispatch(login({username: username.value, password: password.value}))
       }
     }
   
@@ -28,7 +32,6 @@ const LoginForm = () => {
     <section className='fadeInLeft'>
       <Head title='Login'/>
       <h1 className='title' style={{marginBottom: '2.8rem'}}>Entrar</h1>
-      <Error error={error} />
       <form onSubmit={handleSubmit}>
         <Input 
           label='Usuário'
