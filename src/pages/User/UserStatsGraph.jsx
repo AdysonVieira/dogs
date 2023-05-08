@@ -22,7 +22,7 @@ const UserStatsGraph = ({ data }) => {
   return (
     <div className={styles.wrapper}>
       <div className={`${styles.card} ${styles.total}`}>
-        <h1>Total de acessos: {total}</h1>
+        <h3>Total de acessos: {total}</h3>
       </div>
       <div className={styles.card}>
         <VictoryPie

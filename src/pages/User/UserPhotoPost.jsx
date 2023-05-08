@@ -1,20 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import useFetch from '../../hooks/useFetch';
-import { PHOTO_POST } from '../../api';
 import Input from '../../components/Form/Input';
 import Button from '../../components/Form/Button';
 import Error from '../../components/Helper/Error'
 import styles from './UserPhotoPost.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { photoPost } from '../../store/reducers/photoPost';
 
 const UserPhotoPost = () => {
   const name = useForm();
   const age = useForm('number');
   const weight = useForm('number');
+
   const [photo, setPhoto] = React.useState({});
-  const { data, loading, error, request } = useFetch();
+  
   const navigate = useNavigate();
+  
+  const { error, data, loading } = useSelector((state) => state.photoPost);
+  const { token } = useSelector((state) => state.token.data)
+  const dispatch = useDispatch();
+
 
   React.useEffect(() => {
     if (data) navigate('/conta');
@@ -28,9 +34,7 @@ const UserPhotoPost = () => {
     formData.append('peso', weight.value);
     formData.append('idade', age.value);
 
-    const token = window.localStorage.getItem('token');
-    const { url, options } = PHOTO_POST(formData, token)
-    request(url, options)
+    dispatch(photoPost({formData, token}));
   };
 
   const handleChange = ({ target }) => {

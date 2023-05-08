@@ -2,14 +2,16 @@ import React from 'react';
 import Image from '../../components/Helper/Image';
 import styles from './FeedPhotosItem.module.css';
 import { useDispatch } from 'react-redux';
-import { fetchPhoto } from '../../store/reducers/photoReducer';
+import { clearState, fetchPhoto } from '../../store/reducers/photoGet';
+import { openModal } from '../../store/reducers/modal';
 
-const FeedPhotosItem = ({ id, src, title, acessos, setModalOpened }) => {
+const FeedPhotosItem = ({ id, src, title, acessos }) => {
   const dispatch = useDispatch()
   
   const handleClick = () => {
-    setModalOpened(true);
+    dispatch(clearState())
     dispatch(fetchPhoto(id));
+    dispatch(openModal())
   };
   
   return (

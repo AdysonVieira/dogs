@@ -1,40 +1,38 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { PHOTOS_GET } from '../../api';
-import useFetch from '../../hooks/useFetch';
 import FeedModal from './FeedModal';
 import FeedPhotosItem from './FeedPhotosItem';
 import Error from '../../components/Helper/Error';
 import styles from './Feed.module.css';
 import Empty from '../../components/Helper/Empty';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearState, fetchFeed } from '../../store/reducers/feed';
+import LoadOver from '../../components/Helper/LoadOver';
 
 const Feed = ({user}) => {
-  const { data, loading, error, request } = useFetch();
-  const [modalOpened, setModalOpened] = React.useState(false);
-  const [total, setTotal] = React.useState(6)
-  const [stopFetch, setStopFetch] = React.useState(true)
+  const { modal } = useSelector((state) => state)
 
-  const fetchPhotosToFeed = async () => {
-    const {url, options} = PHOTOS_GET({page: 1, total, user});
-    const {json} = await request(url, options);
-    if (total > json.length) {
-      setStopFetch(false)
-    }
-  };
+  const dispatch = useDispatch();
+  const { data, loading, error, stop } = useSelector((state) => state.feed) 
 
   React.useEffect(() => {
-    if (stopFetch){
-      fetchPhotosToFeed();
+    dispatch(fetchFeed({total: 6, user}));
+  }, []);
+ 
+  React.useEffect(() => {
+    dispatch(clearState());
+    return () => {
+      dispatch(clearState());
     }
-  }, [total]);
-
+  }, [user]);
+  
   React.useEffect(() => {
     let wait = false
     function scrollFetch() {
       const scroll = window.scrollY;
       const height = document.body.offsetHeight - window.innerHeight;
-      if (scroll > height * 0.6 && !wait) {
-        setTotal((prev) => prev + 6)
+      if (scroll > height * 0.7 && !wait) {
+        dispatch(fetchFeed({total: 6, user}));
         wait = true
         setTimeout(() => {
           wait = false
@@ -56,25 +54,21 @@ const Feed = ({user}) => {
   if (data) {
     return (
       <>
-        {modalOpened &&
+        {modal.isOpened &&
           createPortal(
-            <FeedModal 
-              modalOpened={modalOpened}
-              setModalOpened={setModalOpened}
-            />, 
+            <FeedModal />, 
             document.getElementById('root')
           )
         }
-          
         <ul className={`${styles.feed} container`}>
           {data?.map((post) => (
             <FeedPhotosItem
-              key={post.id}
+              key={post?.id}
               {...post}
-              setModalOpened={setModalOpened}
             />
           ))}
         </ul>
+        {stop && <LoadOver />}
       </>
     );
   };

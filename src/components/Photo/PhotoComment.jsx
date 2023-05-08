@@ -1,12 +1,12 @@
 import React from 'react';
-import { UserContext } from '../../UserContext';
 import PhotoCommentInput from './PhotoCommentInput';
 import styles from './PhotoComment.module.css'
+import { useSelector } from 'react-redux';
 
 
 const PhotoComment = (props) => {
   const [comments, setComments] = React.useState(() => props.comments)
-  const { logged } = React.useContext(UserContext);
+  const { isLogged } = useSelector((state) => state.user)
   const containerComments = React.useRef();
 
   React.useEffect(() => {
@@ -25,7 +25,7 @@ const PhotoComment = (props) => {
             </li>
           ))}
       </ul>
-      {logged && <PhotoCommentInput id={props.photo.id} setComments={setComments} />}
+      {isLogged && <PhotoCommentInput id={props.photo.id} setComments={setComments} />}
     </>
   )
 }

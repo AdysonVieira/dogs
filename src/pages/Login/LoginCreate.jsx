@@ -1,5 +1,4 @@
 import React from 'react';
-import { UserContext } from '../../UserContext'
 import { USER_POST } from '../../api';
 import Input from '../../components/Form/Input';
 import useForm from '../../hooks/useForm';

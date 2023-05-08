@@ -3,14 +3,16 @@ import Head from '../../components/Head'
 import useFetch from '../../hooks/useFetch'
 import { STATS_GET } from '../../api';
 import Loading from '../../components/Helper/Loading';
+import { useSelector } from 'react-redux';
 const UserStatsGraph = React.lazy(() => import('./UserStatsGraph') )
 
 const UserStats = () => {
   const { data, loading, error, request } = useFetch();
+  const { token } = useSelector((state) => state.token.data)
 
   React.useEffect(() => {
     const getStats = async () => {
-      const { url, options } = STATS_GET()
+      const { url, options } = STATS_GET(token)
       await request(url, options)
     }
     getStats()

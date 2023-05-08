@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { UserContext } from '../../UserContext'
 
 import Feed from '../Feed/Feed'
 import UserHeader from './UserHeader'

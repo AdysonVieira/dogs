@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/Helper/ProtectedRoute';
-import { UserContextProvider } from './UserContext';
 import Home from './pages/Home';
 import Login from './pages/Login/Login';
 import User from './pages/User/User';
@@ -15,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { autoLogin } from './store/reducers/user';
 
 function App() {
+  
   const dispatch = useDispatch()
   React.useEffect(() => {
     dispatch(autoLogin())
@@ -23,26 +23,24 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
-        <UserContextProvider>
-          <Header />
-          <main className='AppBody'>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='login/*' element={<Login />} />
-              <Route path='conta/*'
-                element={
-                  <ProtectedRoute>
-                    <User />
-                  </ProtectedRoute>
-                }
-                />
-              <Route path='foto/:id' element={<Photo />} />
-              <Route path='profile/:user' element={<Profile />} />
-              <Route path='*' element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </UserContextProvider>
+        <Header />
+        <main className='AppBody'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='login/*' element={<Login />} />
+            <Route path='conta/*'
+              element={
+                <ProtectedRoute>
+                  <User />
+                </ProtectedRoute>
+              }
+              />
+            <Route path='foto/:id' element={<Photo />} />
+            <Route path='profile/:user' element={<Profile />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
       </BrowserRouter>
     </div>
   );

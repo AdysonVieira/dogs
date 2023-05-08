@@ -76,7 +76,7 @@ export const PASSWORD_LOST = (body) => {
   };
 };
 
-export const PHOTO_POST = (formData, token) => {
+export const PHOTO_POST = ({formData, token}) => {
   return {
     url: API_URL + '/api/photo',
     options: {
@@ -89,9 +89,9 @@ export const PHOTO_POST = (formData, token) => {
   };
 };
 
-export const PHOTOS_GET = ({page, total, user}) => {
+export const PHOTOS_GET = ({pages, total, user}) => {
   return {
-    url: `${API_URL}/api/photo/?_page=${page}&_total=${total}&_user=${user}`,
+    url: `${API_URL}/api/photo/?_page=${pages}&_total=${total}&_user=${user}`,
     options: {
       method: 'GET',
       cache: 'no-store',
@@ -135,13 +135,13 @@ export const COMMENT_POST = (id, body) => {
   };
 };
 
-export const STATS_GET = () => {
+export const STATS_GET = (token) => {
   return {
     url: `${API_URL}/api/stats`,
     options: {
       method: 'GET',
       headers: {
-        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+        Authorization: 'Bearer ' + token,
       },
     },
   };
